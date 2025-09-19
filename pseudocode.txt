@@ -1,0 +1,22 @@
+START RockPaperScissors
+
+DISPLAY "Choose Rock, Paper, or Scissors"
+
+FUNCTION playGame(playerChoice):
+    SET choices = ["rock", "paper", "scissors"]
+    SET computerChoice = RANDOM(choices)
+    
+    IF playerChoice == computerChoice THEN
+        SET result = "It's a draw!"
+    ELSE IF (playerChoice == "rock" AND computerChoice == "scissors") OR
+            (playerChoice == "paper" AND computerChoice == "rock") OR
+            (playerChoice == "scissors" AND computerChoice == "paper") THEN
+        SET result = "You win!"
+    ELSE
+        SET result = "You lose!"
+    ENDIF
+
+    DISPLAY "Player Choice: " + playerChoice
+    DISPLAY "Computer Choice: " + computerChoice
+    DISPLAY "Result: " + result
+END FUNCTION
