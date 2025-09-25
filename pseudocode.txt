@@ -10,7 +10,8 @@ FUNCTION playGame(playerChoice):
         SET result = "It's a draw!"
     ELSE IF (playerChoice == "rock" AND computerChoice == "scissors") OR
             (playerChoice == "paper" AND computerChoice == "rock") OR
-            (playerChoice == "scissors" AND computerChoice == "paper") THEN
+            (playerChoice == "scissors" AND computerChoice == "paper") 
+            (playerChoice == "gun" AND computerChoice == "rock") THEN
         SET result = "You win!"
     ELSE
         SET result = "You lose!"

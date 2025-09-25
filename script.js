@@ -9,6 +9,7 @@ function playGame(playerChoice) {
         (playerChoice === "rock" && computerChoice === "scissors") ||
         (playerChoice === "paper" && computerChoice === "rock") ||
         (playerChoice === "scissors" && computerChoice === "paper")
+        (playerChoice === "gun" && computerChoice === "rock")
     ) {
         result = "You win!";
     } else {
