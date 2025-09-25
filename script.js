@@ -1,6 +1,6 @@
 function playGame(playerChoice) {
     const choices = ["rock", "paper", "scissors", "gun"];
-    const computerChoice = choices[Math.floor(Math.random() * 3)];
+    const computerChoice = choices[Math.floor(Math.random() * 4)];
 
     let result;
     if (playerChoice === computerChoice) {
