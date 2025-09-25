@@ -1,5 +1,5 @@
 function playGame(playerChoice) {
-    const choices = ["rock", "paper", "scissors"];
+    const choices = ["rock", "paper", "scissors", "gun"];
     const computerChoice = choices[Math.floor(Math.random() * 3)];
 
     let result;
