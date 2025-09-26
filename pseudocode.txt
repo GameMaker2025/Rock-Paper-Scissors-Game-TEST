@@ -11,7 +11,8 @@ FUNCTION playGame(playerChoice):
     ELSE IF (playerChoice == "rock" AND computerChoice == "scissors") OR
             (playerChoice == "paper" AND computerChoice == "rock") OR
             (playerChoice == "scissors" AND computerChoice == "paper") 
-            (playerChoice == "gun" AND computerChoice == "rock") THEN
+            (playerChoice == "gun" AND computerChoice == "rock")
+            (playerChoice == "car" AND computerChoice == "gun") THEN
         SET result = "You win!"
     ELSE
         SET result = "You lose!"

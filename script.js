@@ -8,8 +8,9 @@ function playGame(playerChoice) {
     } else if (
         (playerChoice === "rock" && computerChoice === "scissors") ||
         (playerChoice === "paper" && computerChoice === "rock") ||
-        (playerChoice === "scissors" && computerChoice === "paper")
-        (playerChoice === "gun" && computerChoice === "rock")
+        (playerChoice === "scissors" && computerChoice === "paper") ||
+        (playerChoice === "gun" && computerChoice === "rock") ||
+        (playerChoice === "car" && computerChoice === "gun")
     ) {
         result = "You win!";
     } else {
