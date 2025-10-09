@@ -11,8 +11,9 @@ function playGame(playerChoice) {
         (playerChoice === "scissors" && computerChoice === "paper") ||
         (playerChoice === "gun" && computerChoice === "box") ||
         (playerChoice === "car" && computerChoice === "gun") ||
-        (playerChoice === "box" && computerChoice == "glove") ||
-        (playerChoice === "glove" && computerChoice == "paper")
+        (playerChoice === "box" && computerChoice === "glove") ||
+        (playerChoice === "glove" && computerChoice === "paper") ||
+        (playerChoice === "gun" && computerChoice === "rock")
     ) {
         result = "You win!";
     } else {
