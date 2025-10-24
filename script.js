@@ -1,6 +1,7 @@
+// Player chooses while Computer randomly chooses through Math.
 function playGame(playerChoice) {
     const choices = ["rock", "paper", "scissors", "gun", "car", "box", "glove", "hand"];
-    const computerChoice = choices[Math.floor(Math.random() * 4)];
+    const computerChoice = choices[Math.floor(Math.random() * 9)];
 // Game ends in draw if Player and Computer select same option.
     let result;
     if (playerChoice === computerChoice) {
