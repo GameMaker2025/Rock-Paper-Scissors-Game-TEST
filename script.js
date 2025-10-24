@@ -1,19 +1,21 @@
 function playGame(playerChoice) {
-    const choices = ["rock", "paper", "scissors", "gun"];
+    const choices = ["rock", "paper", "scissors", "gun", "car", "box", "glove", "hand"];
     const computerChoice = choices[Math.floor(Math.random() * 4)];
-
+// Game ends in draw if Player and Computer select same option.
     let result;
     if (playerChoice === computerChoice) {
         result = "It's a draw!";
+        // Player and Computer determine the results of the match based on pairs.
     } else if (
         (playerChoice === "rock" && computerChoice === "scissors") ||
         (playerChoice === "paper" && computerChoice === "rock") ||
         (playerChoice === "scissors" && computerChoice === "paper") ||
-        (playerChoice === "gun" && computerChoice === "box") ||
-        (playerChoice === "car" && computerChoice === "gun") ||
-        (playerChoice === "box" && computerChoice === "glove") ||
-        (playerChoice === "glove" && computerChoice === "paper") ||
-        (playerChoice === "gun" && computerChoice === "rock")
+        (playerChoice === "gun" && computerChoice === "scissors") ||
+        (playerChoice === "car" && computerChoice === "paper") ||
+        (playerChoice === "box" && computerChoice === "rock") ||
+        (playerChoice === "glove" && computerChoice === "hand") ||
+        (playerChoice === "gun" && computerChoice === "hand") ||
+        (playerChoice === "hand" && computerChoice === "")
     ) {
         result = "You win!";
     } else {
