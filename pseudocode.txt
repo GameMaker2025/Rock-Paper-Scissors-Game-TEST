@@ -13,8 +13,6 @@ FUNCTION playGame(playerChoice):
             (playerChoice == "scissors" AND computerChoice == "paper") 
             (playerChoice == "gun" AND computerChoice == "box")
             (playerChoice == "car" AND computerChoice == "gun") 
-            (playerChoice == "box" AND computerChoice == "glove")
-            (playerChoice == "glove" AND computerChoice == "paper") 
             (playerChoice == "gun" && computerChoice == "car") THEN
         SET result = "You win!"
     ELSE
