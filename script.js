@@ -1,4 +1,3 @@
-
 let playerScore = 0;
 let computerScore = 0;
 let timeLeft = 30; // 30-second timer
