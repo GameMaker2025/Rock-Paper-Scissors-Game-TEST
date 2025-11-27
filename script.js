@@ -1,65 +1,116 @@
 
+// ===== Global State =====
 let playerScore = 0;
 let computerScore = 0;
 let timeLeft = 30;
-let timerInterval;
+let timerInterval = null;
 
+// Allowed moves
+const choices = ["rock", "paper", "scissors", "gun", "car", "box"];
+
+// Win map: key beats value
+const beats = {
+  rock: "scissors",
+  paper: "rock",
+  scissors: "paper",
+  gun: "box",
+  car: "gun",
+  box: "car",
+};
+
+// ===== UI Helpers =====
+function updateScoreboard() {
+  document.getElementById("scoreboard").textContent =
+    `Player: ${playerScore} | Computer: ${computerScore}`;
+}
+
+function updateTimerUI() {
+  document.getElementById("timer").textContent = `Time: ${timeLeft}s`;
+}
+
+function setResultText(text) {
+  document.getElementById("game-result").textContent = text;
+}
+
+// Enable/disable choice buttons
+function setChoiceButtonsEnabled(enabled) {
+  document.querySelectorAll(".choice-btn").forEach(btn => {
+    btn.disabled = !enabled;
+  });
+}
+
+// ===== Game Flow =====
 function startGame() {
-    // Reset scores and timer
-    playerScore = 0;
-    computerScore = 0;
-    timeLeft = 30;
+  // Reset scores and timer for a new session
+  playerScore = 0;
+  computerScore = 0;
+  timeLeft = 30;
+  updateScoreboard();
+  updateTimerUI();
+  setResultText("Game started! Pick a move.");
 
-    document.getElementById("scoreboard").textContent = `Player: ${playerScore} | Computer: ${computerScore}`;
-    document.getElementById("timer").textContent = `Time: ${timeLeft}s`;
+  // Stop any existing timer
+  if (timerInterval) clearInterval(timerInterval);
 
-    clearInterval(timerInterval); // Stop any previous timer
-    timerInterval = setInterval(() => {
-        timeLeft--;
-        document.getElementById("timer").textContent = `Time: ${timeLeft}s`;
+  // Start countdown
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    updateTimerUI();
 
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            alert(`Time's up! Final Score: Player ${playerScore} - Computer ${computerScore}`);
-            disableButtons();
-        }
-    }, 1000);
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      setResultText(`Time's up! Final Score — Player ${playerScore} : Computer ${computerScore}`);
+      setChoiceButtonsEnabled(false);
+    }
+  }, 1000);
 
-    enableButtons();
+  setChoiceButtonsEnabled(true);
+}
+
+function restartGame() {
+  // Same as start but without showing alert; clean slate
+  startGame();
 }
 
 function playGame(playerChoice) {
-    const choices = ["rock", "paper", "scissors", "gun", "car", "box"];
-    const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+  // Safeguard: ignore clicks if timer not running
+  if (!timerInterval) {
+    setResultText("Press Start Game to begin.");
+    return;
+  }
 
-    let result;
-    if (playerChoice === computerChoice) {
-        result = "It's a draw!";
-    } else if (
-        (playerChoice === "rock" && computerChoice === "scissors") ||
-        (playerChoice === "paper" && computerChoice === "rock") ||
-        (playerChoice === "scissors" && computerChoice === "paper") ||
-        (playerChoice === "gun" && computerChoice === "box") ||
-        (playerChoice === "car" && computerChoice === "gun") ||
-        (playerChoice === "box" && computerChoice === "car")
-    ) {
-        result = "You win!";
-        playerScore++;
-    } else {
-        result = "You lose!";
-        computerScore++;
-    }
+  const computerChoice = choices[Math.floor(Math.random() * choices.length)];
 
-    document.getElementById("player-choice").textContent = playerChoice;
-    document.getElementById("computer-choice").textContent = computerChoice;
-    document.getElementById("game-result").textContent = result;
-    document.getElementById("scoreboard").textContent = `Player: ${playerScore} | Computer: ${computerScore}`;
+  // Decide result
+  let result;
+  if (playerChoice === computerChoice) {
+    result = "It's a draw!";
+  } else if (beats[playerChoice] === computerChoice) {
+    result = "You win!";
+    playerScore++;
+  } else {
+    result = "You lose!";
+    computerScore++;
+  }
+
+  // Update UI
+  document.getElementById("player-choice").textContent = playerChoice;
+  document.getElementById("computer-choice").textContent = computerChoice;
+  setResultText(result);
+  updateScoreboard();
 }
 
-function disableButtons() {
-    document.querySelectorAll("button[onclick^='playGame']").forEach(btn => btn.disabled = true);
-}
+// ===== Wire up buttons without inline onclick =====
+document.getElementById("start-btn").addEventListener("click", startGame);
+document.getElementById("restart-btn").addEventListener("click", restartGame);
 
-function enableButtons() {
-    document.querySelectorAll("button[onclick^='playGame']").forEach(btn => btn.disabled = false);
-}
+document.querySelectorAll(".choice-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const choice = btn.getAttribute("data-choice");
+    playGame(choice);
+  });
+});
+
+// Disable buttons initially until Start is pressed
+setChoiceButtonsEnabled(false);
