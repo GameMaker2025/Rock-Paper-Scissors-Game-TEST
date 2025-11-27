@@ -13,6 +13,8 @@
     Gun beats Box. Car beats Gun. Box beats Car.
     </p>
     <div class="buttons">
+        <!-- Start timer button -->
+    <button onclick="startTimer()">Start Game</button>
         <button onclick="playGame('rock')">Rock</button>
         <button onclick="playGame('paper')">Paper</button>
         <button onclick="playGame('scissors')">Scissors</button>
@@ -27,6 +29,12 @@
         <p>Result: <span id="game-result">-</span></p>
     </div>
 
+    <div id="timer">Time: 30s</div>
+    <div id="scoreboard">Player: 0 | Computer: 0</div>
+    <div id="player-choice"></div>
+    <div id="computer-choice"></div>
+    <div id="game-result"></div>
+     
     <script src="script.js"></script>
 </body>
 </html>

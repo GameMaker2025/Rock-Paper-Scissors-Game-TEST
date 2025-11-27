@@ -1,3 +1,24 @@
+
+let playerScore = 0;
+let computerScore = 0;
+let timeLeft = 30; // 30-second timer
+let timerInterval;
+
+function startTimer() {
+    clearInterval(timerInterval); // Reset timer if already running
+    timeLeft = 30;
+    document.getElementById("timer").textContent = `Time: ${timeLeft}s`;
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").textContent = `Time: ${timeLeft}s`;
+
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            alert("Time's up! Final Score: Player " + playerScore + " - Computer " + computerScore);
+        }
+    }, 1000);
+}
 // Player chooses while Computer randomly chooses through Math.
 function playGame(playerChoice) {
     const choices = ["rock", "paper", "scissors", "gun", "car", "box"];
@@ -23,4 +44,5 @@ function playGame(playerChoice) {
     document.getElementById("player-choice").textContent = playerChoice;
     document.getElementById("computer-choice").textContent = computerChoice;
     document.getElementById("game-result").textContent = result;
+    document.getElementById("scoreboard").textContent = `Player: ${playerScore} | Computer: ${computerScore}`;
 }
