@@ -29,11 +29,30 @@
         <p>Result: <span id="game-result">-</span></p>
     </div>
 
-    <div id="timer">Time: 30s</div>
-    <div id="scoreboard">Player: 0 | Computer: 0</div>
-    <div id="player-choice"></div>
-    <div id="computer-choice"></div>
-    <div id="game-result"></div>
+  
+<div id="timer">Time: 30s</div>
+<div id="scoreboard">Player: 0 | Computer: 0</div>
+
+<div>
+  <strong>Player chose:</strong> <span id="player-choice">—</span>
+</div>
+<div>
+  <strong>Computer chose:</strong> <span id="computer-choice">—</span>
+</div>
+<div id="game-result">Press Start and pick a move</div>
+
+<!-- Choice buttons -->
+<button class="choice-btn" data-choice="rock">Rock</button>
+<button class="choice-btn" data-choice="paper">Paper</button>
+<button class="choice-btn" data-choice="scissors">Scissors</button>
+<button class="choice-btn" data-choice="gun">Gun</button>
+<button class="choice-btn" data-choice="car">Car</button>
+<button class="choice-btn" data-choice="box">Box</button>
+
+<!-- Controls -->
+<button id="start-btn">Start Game</button>
+<button id="restart-btn">Restart</button>
+
 
     <script src="script.js"></script>
 </body>
