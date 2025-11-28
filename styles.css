@@ -1,17 +1,104 @@
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
 body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    color: #fff;
     text-align: center;
-    font-family: Arial, sans-serif;
+    padding: 20px;
 }
 
+/* Heading */
+h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Description */
+p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+/* Buttons Container */
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+/* Game Buttons */
 .buttons button {
-    font-size: 40px;
-    margin: 20px;
-    padding: 10px 20px;
+    font-size: 1.5rem;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 10px;
+    background: #fff;
+    color: #4e54c8;
+    font-weight: bold;
     cursor: pointer;
-    color: #5e6eca;
+    transition: all 0.3s ease;
 }
 
-#result {
-    font-size: 18px;
+.buttons button:hover {
+    background: #4e54c8;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* Timer & Scoreboard */
+#timer, #scoreboard {
+    font-size: 1.3rem;
+    margin: 15px 0;
+    font-weight: bold;
+}
+
+/* Choices Display */
+div strong {
+    font-size: 1.2rem;
+}
+
+#player-choice, #computer-choice {
+    font-size: 1.3rem;
+    color: #ffd700;
+    font-weight: bold;
+}
+
+/* Game Result */
+#game-result {
+    font-size: 1.5rem;
     margin-top: 20px;
+    font-weight: bold;
+    color: #ffeb3b;
+}
+
+/* Control Buttons */
+#start-btn, #restart-btn {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #ff5722;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#start-btn:hover, #restart-btn:hover {
+    background: #e64a19;
 }
