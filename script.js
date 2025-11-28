@@ -6,16 +6,13 @@ let timeLeft = 30;
 let timerInterval = null;
 
 // Allowed moves
-const choices = ["rock", "paper", "scissors", "gun", "car", "box"];
+const choices = ["rock", "paper", "scissors"];
 
 // Win map: key beats value
 const beats = {
   rock: "scissors",
   paper: "rock",
-  scissors: "paper",
-  gun: "box",
-  car: "gun",
-  box: "car",
+  scissors: "paper"
 };
 
 // ===== UI Helpers =====
