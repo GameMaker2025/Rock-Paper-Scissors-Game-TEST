@@ -65,6 +65,77 @@ function startGame() {
   setChoiceButtonsEnabled(true);
 }
 
+// ===== Cookie Helpers =====
+function setCookie(name, value, days = 365) {
+  const expires = new Date(Date.now() + days * 864e5).toUTCString();
+  // Use SameSite=Lax by default; add Secure if you serve over HTTPS.
+  document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;
+  // If your site is HTTPS, prefer:
+  // document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax; Secure`;
+}
+
+function getCookie(name) {
+  const target = `${encodeURIComponent(name)}=`;
+  return document.cookie
+    .split(";")
+    .map(c => c.trim())
+    .find(c => c.startsWith(target))
+    ?.substring(target.length)
+    ? decodeURIComponent(
+        document.cookie
+          .split(";")
+          .map(c => c.trim())
+          .find(c => c.startsWith(target))
+          .substring(target.length)
+      )
+    : null;
+}
+
+function deleteCookie(name) {
+  document.cookie = `${encodeURIComponent(name)}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; SameSite=Lax`;
+}
+
+// ===== High Score =====
+let highScore = 0;
+
+function loadHighScore() {
+  const saved = getCookie("rps_highscore");
+  highScore = saved ? parseInt(saved, 10) : 0;
+  updateHighScoreUI();
+}
+
+function saveHighScore() {
+  setCookie("rps_highscore", String(highScore), 365); // keep for 1 year
+}
+
+function updateHighScoreUI() {
+  document.getElementById("highscore").textContent = `High Score: ${highScore}`;
+}
+
+// Inside your existing timer tick where timeLeft <= 0:
+if (timeLeft <= 0) {
+  clearInterval(timerInterval);
+  timerInterval = null;
+  setResultText(`Time's up! Final Score — Player ${playerScore} : Computer ${computerScore}`);
+  setChoiceButtonsEnabled(false);
+
+  // === High score check on game end ===
+  if (playerScore > highScore) {
+    highScore = playerScore; // or (playerScore - computerScore) if you prefer net score
+    saveHighScore();
+    updateHighScoreUI();
+    // Optional: Tell the player
+    setResultText(`🎉 New High Score: ${highScore}! Final Score — Player ${playerScore} : Computer ${computerScore}`);
+  }
+}
+
+// After you increment playerScore in playGame:
+if (playerScore > highScore) {
+  highScore = playerScore;
+  saveHighScore();
+  updateHighScoreUI();
+}
+
 function restartGame() {
   // Same as start but without showing alert; clean slate
   startGame();
@@ -111,3 +182,7 @@ document.querySelectorAll(".choice-btn").forEach(btn => {
 
 // Disable buttons initially until Start is pressed
 setChoiceButtonsEnabled(false);
+
+// Load existing high score from cookie on initial load
+
+// ... ; SameSite=Lax; Secure
